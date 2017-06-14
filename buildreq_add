@@ -1,0 +1,8 @@
+# This file contains additional build requirements that did not get
+# picked up automatically. One name per line, no whitespace.
+gnu-efi
+gnu-efi-dev
+pesign
+openssl-dev
+util-linux
+nss-bin
