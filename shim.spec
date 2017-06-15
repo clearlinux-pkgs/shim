@@ -4,13 +4,12 @@
 #
 Name     : shim
 Version  : 12
-Release  : 1
+Release  : 2
 URL      : https://github.com/rhboot/shim/releases/download/12/shim-12.tar.bz2
 Source0  : https://github.com/rhboot/shim/releases/download/12/shim-12.tar.bz2
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause
-Requires: shim-bin
 BuildRequires : gnu-efi
 BuildRequires : gnu-efi-dev
 BuildRequires : nss-bin
@@ -29,14 +28,6 @@ instance) it will then validate the binary against a built-in certificate. If
 this succeeds and if the binary or signing key are not blacklisted then shim
 will relocate and execute the binary.
 
-%package bin
-Summary: bin components for the shim package.
-Group: Binaries
-
-%description bin
-bin components for the shim package.
-
-
 %prep
 %setup -q -n shim-12
 %patch1 -p1
@@ -47,24 +38,18 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1497414703
+export SOURCE_DATE_EPOCH=1497548676
 make V=1  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1497414703
+export SOURCE_DATE_EPOCH=1497548676
 rm -rf %{buildroot}
 echo >/dev/null
 ## make_install_append content
-/usr/bin/install -p -D -m 0755 shimx64.efi %{buildroot}%{_libexecdir}/shimx64.efi
-/usr/bin/install -p -D -m 0755 fbx64.efi.signed %{buildroot}%{_libexecdir}/fbx64.efi.signed
-/usr/bin/install -p -D -m 0755 mmx64.efi.signed %{buildroot}%{_libexecdir}/mmx64.efi.signed
+mkdir -p %{buildroot}%{_libdir}/shim
+/usr/bin/install -p -D -m 0755 shimx64.efi %{buildroot}%{_libdir}/shim/shimx64.efi
 ## make_install_append end
 
 %files
 %defattr(-,root,root,-)
-
-%files bin
-%defattr(-,root,root,-)
-/usr/libexec/fbx64.efi.signed
-/usr/libexec/mmx64.efi.signed
-/usr/libexec/shimx64.efi
+/usr/lib64/shim/shimx64.efi
