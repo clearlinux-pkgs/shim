@@ -4,7 +4,7 @@
 #
 Name     : shim
 Version  : 12
-Release  : 2
+Release  : 3
 URL      : https://github.com/rhboot/shim/releases/download/12/shim-12.tar.bz2
 Source0  : https://github.com/rhboot/shim/releases/download/12/shim-12.tar.bz2
 Summary  : No detailed summary available
@@ -16,8 +16,7 @@ BuildRequires : nss-bin
 BuildRequires : openssl-dev
 BuildRequires : pesign
 BuildRequires : util-linux
-Patch1: 0001-Workaround-gnu-efi-pxe.patch
-Patch2: 0002-Makefile-change-obj-loc.patch
+Patch1: 0002-Makefile-change-obj-loc.patch
 
 %description
 shim is a trivial EFI application that, when run, attempts to open and
@@ -31,18 +30,17 @@ will relocate and execute the binary.
 %prep
 %setup -q -n shim-12
 %patch1 -p1
-%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1497548676
+export SOURCE_DATE_EPOCH=1497981471
 make V=1  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1497548676
+export SOURCE_DATE_EPOCH=1497981471
 rm -rf %{buildroot}
 echo >/dev/null
 ## make_install_append content
