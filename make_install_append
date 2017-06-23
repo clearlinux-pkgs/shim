@@ -1,2 +1,4 @@
 mkdir -p %{buildroot}%{_libdir}/shim
 /usr/bin/install -p -D -m 0755 shimx64.efi %{buildroot}%{_libdir}/shim/shimx64.efi
+/usr/bin/install -p -D -m 0755 mmx64.efi.signed %{buildroot}%{_libdir}/shim/mmx64.efi
+/usr/bin/install -p -D -m 0755 fbx64.efi.signed %{buildroot}%{_libdir}/shim/fbx64.efi
