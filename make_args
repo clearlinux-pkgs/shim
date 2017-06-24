@@ -1,1 +1,1 @@
-EFI_CRT_OBJS=/usr/lib64/crt0-efi-x86_64.o DEFAULT_LOADER=loaderx64.efi
+EFI_CRT_OBJS=/usr/lib64/crt0-efi-x86_64.o DEFAULT_LOADER=loaderx64.efi VENDOR_CERT_FILE=clear-linux-sb.pem
