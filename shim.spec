@@ -4,7 +4,7 @@
 #
 Name     : shim
 Version  : 12
-Release  : 6
+Release  : 7
 URL      : https://github.com/rhboot/shim/releases/download/12/shim-12.tar.bz2
 Source0  : https://github.com/rhboot/shim/releases/download/12/shim-12.tar.bz2
 Summary  : No detailed summary available
@@ -38,11 +38,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1498687014
-make V=1  %{?_smp_mflags} EFI_CRT_OBJS=/usr/lib64/crt0-efi-x86_64.o DEFAULT_LOADER=loaderx64.efi VENDOR_CERT_FILE=clear-linux-sb.pem
+export SOURCE_DATE_EPOCH=1498687808
+make V=1  %{?_smp_mflags} EFI_CRT_OBJS=/usr/lib64/crt0-efi-x86_64.o DEFAULT_LOADER=loaderx64.efi VENDOR_CERT_FILE=clear-linux-sb.pem OVERRIDE_SECURITY_POLICY=1
 
 %install
-export SOURCE_DATE_EPOCH=1498687014
+export SOURCE_DATE_EPOCH=1498687808
 rm -rf %{buildroot}
 true
 ## make_install_append content
