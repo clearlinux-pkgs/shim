@@ -4,7 +4,7 @@
 #
 Name     : shim
 Version  : 12
-Release  : 5
+Release  : 6
 URL      : https://github.com/rhboot/shim/releases/download/12/shim-12.tar.bz2
 Source0  : https://github.com/rhboot/shim/releases/download/12/shim-12.tar.bz2
 Summary  : No detailed summary available
@@ -17,6 +17,7 @@ BuildRequires : openssl-dev
 BuildRequires : pesign
 BuildRequires : util-linux
 Patch1: 0001-Add-Intel-Certificate.patch
+Patch2: 0002-Fix-security-policy-compile-errors.patch
 
 %description
 shim is a trivial EFI application that, when run, attempts to open and
@@ -30,17 +31,18 @@ will relocate and execute the binary.
 %prep
 %setup -q -n shim-12
 %patch1 -p1
+%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1498284291
+export SOURCE_DATE_EPOCH=1498687014
 make V=1  %{?_smp_mflags} EFI_CRT_OBJS=/usr/lib64/crt0-efi-x86_64.o DEFAULT_LOADER=loaderx64.efi VENDOR_CERT_FILE=clear-linux-sb.pem
 
 %install
-export SOURCE_DATE_EPOCH=1498284291
+export SOURCE_DATE_EPOCH=1498687014
 rm -rf %{buildroot}
 true
 ## make_install_append content
