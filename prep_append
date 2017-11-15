@@ -1,0 +1,1 @@
+openssl x509 -in clear-linux-sb.pem -out clear-linux-sb.cer -outform der
