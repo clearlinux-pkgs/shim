@@ -4,7 +4,7 @@
 #
 Name     : shim
 Version  : 12
-Release  : 11
+Release  : 12
 URL      : https://github.com/rhboot/shim/releases/download/12/shim-12.tar.bz2
 Source0  : https://github.com/rhboot/shim/releases/download/12/shim-12.tar.bz2
 Summary  : No detailed summary available
