@@ -4,7 +4,7 @@
 #
 Name     : shim
 Version  : 15
-Release  : 15
+Release  : 16
 URL      : https://github.com/rhboot/shim/releases/download/15/shim-15.tar.bz2
 Source0  : https://github.com/rhboot/shim/releases/download/15/shim-15.tar.bz2
 Summary  : No detailed summary available
@@ -48,11 +48,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1538690830
+export SOURCE_DATE_EPOCH=1542433477
 make  %{?_smp_mflags} EFI_CRT_OBJS=/usr/lib64/crt0-efi-x86_64.o DEFAULT_LOADER=loaderx64.efi VENDOR_CERT_FILE=clear-linux-sb.cer OVERRIDE_SECURITY_POLICY=1
 
 %install
-export SOURCE_DATE_EPOCH=1538690830
+export SOURCE_DATE_EPOCH=1542433477
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/shim
 cp COPYRIGHT %{buildroot}/usr/share/package-licenses/shim/COPYRIGHT
@@ -71,5 +71,5 @@ mkdir -p %{buildroot}/usr/lib/shim
 /usr/lib/shim/shimx64.efi
 
 %files license
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/package-licenses/shim/COPYRIGHT
