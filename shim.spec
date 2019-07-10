@@ -4,7 +4,7 @@
 #
 Name     : shim
 Version  : 15
-Release  : 17
+Release  : 18
 URL      : https://github.com/rhboot/shim/releases/download/15/shim-15.tar.bz2
 Source0  : https://github.com/rhboot/shim/releases/download/15/shim-15.tar.bz2
 Summary  : No detailed summary available
@@ -18,6 +18,7 @@ BuildRequires : openssl-dev
 BuildRequires : pesign
 BuildRequires : util-linux
 Patch1: 0001-Add-Intel-Certificate.patch
+Patch2: 0002-Fix_the_errors_from_gcc9_Werror_address_of_packed_member.patch
 
 %description
 shim is a trivial EFI application that, when run, attempts to open and
@@ -39,6 +40,7 @@ license components for the shim package.
 %prep
 %setup -q -n shim-15
 %patch1 -p1
+%patch2 -p1
 
 %build
 ## build_prepend content
@@ -47,12 +49,21 @@ openssl x509 -in clear-linux-sb.pem -out clear-linux-sb.cer -outform der
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1542433477
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1562802011
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 make  %{?_smp_mflags} EFI_CRT_OBJS=/usr/lib64/crt0-efi-x86_64.o DEFAULT_LOADER=loaderx64.efi VENDOR_CERT_FILE=clear-linux-sb.cer OVERRIDE_SECURITY_POLICY=1
 
+
 %install
-export SOURCE_DATE_EPOCH=1542433477
+export SOURCE_DATE_EPOCH=1562802011
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/shim
 cp COPYRIGHT %{buildroot}/usr/share/package-licenses/shim/COPYRIGHT
