@@ -4,7 +4,7 @@
 #
 Name     : shim
 Version  : 15
-Release  : 18
+Release  : 19
 URL      : https://github.com/rhboot/shim/releases/download/15/shim-15.tar.bz2
 Source0  : https://github.com/rhboot/shim/releases/download/15/shim-15.tar.bz2
 Summary  : No detailed summary available
@@ -13,6 +13,7 @@ License  : BSD-2-Clause
 Requires: shim-license = %{version}-%{release}
 BuildRequires : gnu-efi
 BuildRequires : gnu-efi-dev
+BuildRequires : gnu-efi-staticdev
 BuildRequires : nss-bin
 BuildRequires : openssl-dev
 BuildRequires : pesign
@@ -50,7 +51,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1562802011
+export SOURCE_DATE_EPOCH=1568736362
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -63,7 +64,7 @@ make  %{?_smp_mflags} EFI_CRT_OBJS=/usr/lib64/crt0-efi-x86_64.o DEFAULT_LOADER=l
 
 
 %install
-export SOURCE_DATE_EPOCH=1562802011
+export SOURCE_DATE_EPOCH=1568736362
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/shim
 cp COPYRIGHT %{buildroot}/usr/share/package-licenses/shim/COPYRIGHT
