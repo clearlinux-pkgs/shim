@@ -1,0 +1,29 @@
+From 9d48b2d0056f0eb3dc473e58b149cba340a9a252 Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Thu, 3 Aug 2023 13:11:43 -0700
+Subject: [PATCH] Add build workaround
+
+Add missing flag to lib build.
+
+Signed-off-by: William Douglas <william.douglas@intel.com>
+---
+ lib/Makefile | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/lib/Makefile b/lib/Makefile
+index f81c5c9..fb1a949 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -18,6 +18,9 @@ CLANG_BUGS	= $(if $(findstring gcc,$(CC)),-maccumulate-outgoing-args,)
+ 
+ ifeq ($(ARCH),x86_64)
+ FEATUREFLAGS	+= -m64 -mno-mmx -mno-sse -mno-red-zone -nostdinc $(CLANG_BUGS)
++ifneq ($(origin OVERRIDE_SECURITY_POLICY), undefined)
++	DEFINES	+= -DOVERRIDE_SECURITY_POLICY
++endif
+ DEFINES		+= -DMDE_CPU_X64
+ endif
+ ifeq ($(ARCH),ia32)
+-- 
+2.41.0
+
